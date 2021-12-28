@@ -2,11 +2,11 @@
 #This simple script for bandit24 (overthewire) will generate a list of combination password + pin numbers. It will also perform a bruteforce attack to get the password for the next level.
 
 #Create temporary folder by executing the following command:
-#replace 'user_folder' with a folder name of your choice
+#Replace 'user_folder' with a folder name of your choice
 #mkdir /tmp/user_folder; cd /tmp/user_folder
 
-#save this script into /tmp/user_folder:
-#replace 'user_script.sh' with a file name of your choice
+#Save this script into /tmp/user_folder and execute the script using bash command:
+#Replace 'user_script.sh' with a file name of your choice
 #nano user_script.sh
 #bash user_script.sh
 
@@ -15,19 +15,19 @@ echo
 echo -n "Please key in the name of your temporary folder: "
 read TEMP_FOLDER
 
-#temporary folder path
+#Assign temporary folder path variable
 TEMP_PATH="/tmp/$TEMP_FOLDER"
 if [ ! -d "$TEMP_PATH" ]; then
   echo "Directory $(echo $TEMP_PATH) does not exist. Please run $0 and try again."
   exit
 fi
 
-#get bandit24's password
+#Get bandit24's password from user
 echo
 echo -n "Enter the password for bandit24: "
 read PW
 
-#create a script to generate a list of combination of $PW and 4 digits pin number
+#Create a script to generate a list of combination of $PW and 4 digits pin number
 echo '#!/bin/bash' > $TEMP_PATH/pinGenerator.sh
 echo 'PW='$PW >> $TEMP_PATH/pinGenerator.sh
 echo 'for i in {0000..9999}' >> $TEMP_PATH/pinGenerator.sh
@@ -38,7 +38,7 @@ echo 'done' >> $TEMP_PATH/pinGenerator.sh
 if [ -f "$TEMP_PATH/pinGenerator.sh" ]; then
   echo
   echo "Pin Generator script created: $TEMP_PATH/pinGenerator.sh"
-  #save the output from the pin generator to a file
+  #Save the output of the pin generator to a file
   bash $TEMP_PATH/pinGenerator.sh >> $TEMP_PATH/passPin.txt
 fi
 
